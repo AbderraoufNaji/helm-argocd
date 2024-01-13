@@ -1,0 +1,24 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: express-demo
+    labels:
+      app: express-demo
+  spec:
+    selector:
+      matchLabels:
+        app: express-demo
+    strategy:
+      type: Recreate
+    replicas: 2
+    template:
+      metadata:
+        labels:
+          app: express-demo
+      spec:
+        containers:
+        - image: najiabderraouf/express-sqlite-app
+          name: express
+          ports:
+          - containerPort: 3000
+            name: demo-http
